@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ career.title }}</h2>
+<p>{{ career.description }}</p>
+
+<div class="mt-4">
+    <h4>Suggested Roadmap</h4>
+    <ul>
+        <li>Step 1: Understand the basics of {{ career.title }}</li>
+        <li>Step 2: Take relevant courses</li>
+        <li>Step 3: Work on projects or internships</li>
+        <li>Step 4: Build portfolio and apply for jobs</li>
+    </ul>
+</div>
+<a href="{{ url_for('courses') }}" class="btn btn-success mt-3">Explore Courses</a>
+<a href="{{ url_for('internships') }}" class="btn btn-info mt-3">Find Internships</a>
+{% endblock %}

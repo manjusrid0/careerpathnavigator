@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Career Options</h2>
+<div class="row">
+    {% for career in careers %}
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ career.title }}</h5>
+                <p class="card-text">{{ career.description[:120] }}...</p>
+                <a href="{{ url_for('roadmap', career_id=career.id) }}" class="btn btn-primary">View Roadmap</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>No careers available yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
