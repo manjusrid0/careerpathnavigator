@@ -1,11 +1,222 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Internship Opportunities</h2>
-<p>Find internships to gain real-world experience:</p>
-<ul>
-    <li><a href="https://internshala.com/" target="_blank">Internshala</a></li>
-    <li><a href="https://www.linkedin.com/jobs/internship-jobs" target="_blank">LinkedIn Internships</a></li>
-    <li><a href="https://angel.co/jobs" target="_blank">AngelList (Startups)</a></li>
-</ul>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #cce0ff, #ffffff);
+    }
+
+    .page-header {
+        text-align: center;
+        margin: 40px 0 30px 0;
+    }
+
+    .page-header h2 {
+        color: #004080;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .page-header p {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .internships-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .internship-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        padding: 20px;
+        width: 300px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .internship-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .internship-card h5 {
+        color: #0073e6;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .internship-card ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .internship-card ul li {
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        color: #555;
+        padding-left: 20px;
+        position: relative;
+    }
+
+    .internship-card ul li::before {
+        content: "💼";
+        position: absolute;
+        left: 0;
+    }
+
+    .internship-card a {
+        text-decoration: none;
+        color: #0073e6;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .internship-card a:hover {
+        color: #004080;
+    }
+</style>
+
+<div class="page-header">
+    <h2>Internship Opportunities</h2>
+    <p>Find career-specific internships to gain real-world experience.</p>
+</div>
+<div class="internships-container">
+    <!-- Software Engineer -->
+    <div class="internship-card">
+        <h5>Software Engineer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/computer%20science" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/software-engineer-intern-jobs/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://angel.co/jobs" target="_blank">AngelList</a></li>
+        </ul>
+    </div>
+
+    <!-- Data Scientist -->
+    <div class="internship-card">
+        <h5>Data Scientist</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/data%20science" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/data-scientist-intern-jobs/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://angel.co/jobs" target="_blank">AngelList</a></li>
+        </ul>
+    </div>
+
+    <!-- Civil Engineer -->
+    <div class="internship-card">
+        <h5>Civil Engineer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/civil%20engineering" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/civil-engineer-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Mechanical Engineer -->
+    <div class="internship-card">
+        <h5>Mechanical Engineer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/mechanical%20engineering" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/mechanical-engineer-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Graphic Designer -->
+    <div class="internship-card">
+        <h5>Graphic Designer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/graphic%20design" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/graphic-designer-intern-jobs/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://angel.co/jobs" target="_blank">AngelList</a></li>
+        </ul>
+    </div>
+
+    <!-- UX/UI Designer -->
+    <div class="internship-card">
+        <h5>UX/UI Designer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/ui%20ux" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/ux-ui-designer-intern-jobs/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://angel.co/jobs" target="_blank">AngelList</a></li>
+        </ul>
+    </div>
+
+    <!-- Teacher -->
+    <div class="internship-card">
+        <h5>Teacher</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/teaching" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/teaching-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Digital Marketer -->
+    <div class="internship-card">
+        <h5>Digital Marketer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/marketing" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/digital-marketing-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Content Writer -->
+    <div class="internship-card">
+        <h5>Content Writer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/content%20writing" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/content-writer-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Fashion Designer -->
+    <div class="internship-card">
+        <h5>Fashion Designer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/fashion%20design" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/fashion-designer-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Chef -->
+    <div class="internship-card">
+        <h5>Chef</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/hospitality" target="_blank">Internshala - Hospitality Internships</a></li>
+            <li><a href="https://www.linkedin.com/jobs/chef-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Photographer -->
+    <div class="internship-card">
+        <h5>Photographer</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/photography" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/photographer-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Event Manager -->
+    <div class="internship-card">
+        <h5>Event Manager</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/event%20management" target="_blank">Internshala</a></li>
+            <li><a href="https://www.linkedin.com/jobs/event-manager-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+
+    <!-- Financial Analyst -->
+    <div class="internship-card">
+        <h5>Financial Analyst</h5>
+        <ul>
+            <li><a href="https://internshala.com/internships/finance" target="_blank">Internshala - Finance Internships</a></li>
+            <li><a href="https://www.linkedin.com/jobs/financial-analyst-intern-jobs/" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+</div>
+
 {% endblock %}

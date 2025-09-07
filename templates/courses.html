@@ -1,12 +1,182 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Courses & Certifications</h2>
-<p>Here are some useful platforms to learn skills:</p>
-<ul>
-    <li><a href="https://www.coursera.org/" target="_blank">Coursera</a></li>
-    <li><a href="https://www.udemy.com/" target="_blank">Udemy</a></li>
-    <li><a href="https://nptel.ac.in/" target="_blank">NPTEL (India)</a></li>
-    <li><a href="https://skillindia.gov.in/" target="_blank">Skill India</a></li>
-</ul>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #cce0ff, #ffffff);
+    }
+
+    .page-header {
+        text-align: center;
+        margin: 40px 0 30px 0;
+    }
+
+    .page-header h2 {
+        color: #004080;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .page-header p {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .courses-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .course-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        padding: 20px;
+        width: 300px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .course-card h5 {
+        color: #0073e6;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .course-card ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .course-card ul li {
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        color: #555;
+        padding-left: 20px;
+        position: relative;
+    }
+
+    .course-card ul li::before {
+        content: "🎓";
+        position: absolute;
+        left: 0;
+    }
+
+    .course-card a {
+        text-decoration: none;
+        color: #0073e6;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .course-card a:hover {
+        color: #004080;
+    }
+</style>
+
+<div class="page-header">
+    <h2>Courses & Certifications</h2>
+    <p>Explore relevant courses and certifications to enhance your skills in your chosen career path.</p>
+</div>
+
+<div class="courses-container">
+    <!-- Software Engineer -->
+    <div class="course-card">
+        <h5>Software Engineer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Programming Fundamentals (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">Data Structures & Algorithms (Udemy)</a></li>
+            <li><a href="https://nptel.ac.in/" target="_blank">NPTEL Software Development Courses</a></li>
+        </ul>
+    </div>
+
+    <!-- Data Scientist -->
+    <div class="course-card">
+        <h5>Data Scientist</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Python for Data Science (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">Machine Learning & AI (Udemy)</a></li>
+            <li><a href="https://nptel.ac.in/" target="_blank">Statistics and Data Analysis (NPTEL)</a></li>
+        </ul>
+    </div>
+
+    <!-- Civil Engineer -->
+    <div class="course-card">
+        <h5>Civil Engineer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Structural Engineering Basics (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">AutoCAD & Design Tools (Udemy)</a></li>
+            <li><a href="https://nptel.ac.in/" target="_blank">Civil Engineering Fundamentals (NPTEL)</a></li>
+        </ul>
+    </div>
+
+    <!-- Graphic Designer -->
+    <div class="course-card">
+        <h5>Graphic Designer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Graphic Design Specialization (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">Adobe Photoshop & Illustrator (Udemy)</a></li>
+            <li><a href="https://skillindia.gov.in/" target="_blank">Design Courses (Skill India)</a></li>
+        </ul>
+    </div>
+
+    <!-- Teacher -->
+    <div class="course-card">
+        <h5>Teacher</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Foundations of Teaching (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">Classroom Management (Udemy)</a></li>
+            <li><a href="https://nptel.ac.in/" target="_blank">Educational Psychology (NPTEL)</a></li>
+        </ul>
+    </div>
+
+    <!-- Digital Marketer -->
+    <div class="course-card">
+        <h5>Digital Marketer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Digital Marketing Specialization (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">SEO & Social Media (Udemy)</a></li>
+            <li><a href="https://skillindia.gov.in/" target="_blank">Skill India Marketing Courses</a></li>
+        </ul>
+    </div>
+
+    <!-- Mechanical Engineer -->
+    <div class="course-card">
+        <h5>Mechanical Engineer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Mechanical Engineering Fundamentals (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">CAD & Design Software (Udemy)</a></li>
+            <li><a href="https://nptel.ac.in/" target="_blank">Thermodynamics & Manufacturing (NPTEL)</a></li>
+        </ul>
+    </div>
+
+    <!-- UX/UI Designer -->
+    <div class="course-card">
+        <h5>UX/UI Designer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">User Experience Design (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">Figma & Prototyping (Udemy)</a></li>
+            <li><a href="https://skillindia.gov.in/" target="_blank">Skill India UX/UI Courses</a></li>
+        </ul>
+    </div>
+
+    <!-- Content Writer -->
+    <div class="course-card">
+        <h5>Content Writer</h5>
+        <ul>
+            <li><a href="https://www.coursera.org/" target="_blank">Content Writing Essentials (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/" target="_blank">SEO Writing & Blogging (Udemy)</a></li>
+            <li><a href="https://skillindia.gov.in/" target="_blank">Skill India Writing Courses</a></li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

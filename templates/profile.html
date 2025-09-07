@@ -1,15 +1,106 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="mb-4">Welcome, {{ user.name }} 👋</h2>
-<p><strong>Email:</strong> {{ user.email }}</p>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #cce0ff, #ffffff);
+    }
 
-<hr>
+    .dashboard-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
 
-<h4>Quick Links</h4>
-<ul>
-    <li><a href="{{ url_for('careers') }}">Explore Careers</a></li>
-    <li><a href="{{ url_for('courses') }}">Recommended Courses</a></li>
-    <li><a href="{{ url_for('internships') }}">Find Internships</a></li>
-</ul>
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .dashboard-header h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #004080;
+    }
+
+    .dashboard-header p {
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .user-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .user-info strong {
+        color: #004080;
+    }
+
+    .quick-links {
+        margin-top: 30px;
+    }
+
+    .quick-links h4 {
+        font-size: 1.3rem;
+        color: #0073e6;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .link-card {
+        background: #f8faff;
+        border-radius: 15px;
+        padding: 55px;
+        margin-bottom: 15px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+    .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .link-card a {
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: #004080;
+    }
+
+    .link-card a:hover {
+        color: #0073e6;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>👋 Welcome, {{ user.name }}</h2>
+        <p>We’re glad to have you back!</p>
+    </div>
+
+    <div class="user-info">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+
+    <div class="quick-links">
+        <h4>Quick Links</h4>
+        <div class="link-card">
+            <a href="{{ url_for('careers') }}">🌟 Explore Careers</a>
+        </div>
+        <div class="link-card">
+            <a href="{{ url_for('courses') }}">📘 Recommended Courses</a>
+        </div>
+        <div class="link-card">
+            <a href="{{ url_for('internships') }}">💼 Find Internships</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

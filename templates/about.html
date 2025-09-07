@@ -1,13 +1,80 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>About Career Path Navigator</h2>
-<p>
-    Career Path Navigator is a student-focused platform that helps learners
-    discover suitable careers, explore skill-building courses, and connect
-    with internship opportunities.
-</p>
-<p>
-    Our mission is to make career planning simple and accessible for everyone.
-</p>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #cce0ff, #ffffff);
+    }
+
+    .about-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 150px;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .about-header h2 {
+        font-weight: 700;
+        font-size: 2rem;
+        color: #004080;
+        margin-bottom: 15px;
+    }
+
+    .about-header p {
+        color: #333;
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .about-sections {
+        text-align: left;
+    }
+
+    .about-sections h4 {
+        color: #0073e6;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .about-sections p {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="about-container">
+    <div class="about-header">
+        <h2>🌟 About Career Path Navigator</h2>
+        <p>A student-focused platform to guide your career journey.</p>
+    </div>
+
+    <div class="about-sections">
+        <h4>🎯 Our Mission</h4>
+        <p>
+            Career Path Navigator is designed to simplify career planning for students.
+            We help learners discover suitable careers, explore skill-building courses,
+            and connect with internship opportunities—all in one place.
+        </p>
+
+        <h4>📚 What We Offer</h4>
+        <p>
+            - A wide variety of <b>career roadmaps</b> across multiple industries.<br>
+            - Links to <b>free courses and resources</b> from trusted platforms.<br>
+            - A curated list of <b>internship opportunities</b> to gain real-world experience.<br>
+            - A simple, intuitive design to make navigation easy for students.
+        </p>
+
+        <h4>🌍 Our Vision</h4>
+        <p>
+            To empower every student with the right tools, guidance, and resources 
+            to shape their future careers—regardless of their background or starting point.
+        </p>
+    </div>
+</div>
 {% endblock %}

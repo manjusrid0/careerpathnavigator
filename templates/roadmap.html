@@ -1,18 +1,158 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ career.title }}</h2>
-<p>{{ career.description }}</p>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #cce0ff, #ffffff);
+    }
 
-<div class="mt-4">
+    .career-header {
+        text-align: center;
+        margin: 40px 0 30px 0;
+    }
+
+    .career-header h2 {
+        color: #004080;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .career-header p {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .roadmap-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .roadmap-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .roadmap-card h4 {
+        color: #0073e6;
+        margin-bottom: 15px;
+    }
+
+    .roadmap-card ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .roadmap-card ul li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .roadmap-card ul li::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        color: #0073e6;
+        font-weight: bold;
+    }
+
+    .btn-custom {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        background: linear-gradient(45deg, #004080, #0073e6);
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background: linear-gradient(45deg, #00264d, #004080);
+        color: #fff;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="career-header">
+    <h2>{{ career.title }}</h2>
+    <p>{{ career.description }}</p>
+</div>
+
+<div class="roadmap-card">
     <h4>Suggested Roadmap</h4>
     <ul>
-        <li>Step 1: Understand the basics of {{ career.title }}</li>
-        <li>Step 2: Take relevant courses</li>
-        <li>Step 3: Work on projects or internships</li>
-        <li>Step 4: Build portfolio and apply for jobs</li>
+        {% if career.title == "Software Engineer" %}
+            <li>Learn programming fundamentals (Python, Java, C++)</li>
+            <li>Study data structures and algorithms</li>
+            <li>Work on small software projects or open-source contributions</li>
+            <li>Build a GitHub portfolio and apply for internships</li>
+        {% elif career.title == "Data Scientist" %}
+            <li>Learn Python/R and statistics basics</li>
+            <li>Study machine learning and data analysis</li>
+            <li>Work on datasets and Kaggle projects</li>
+            <li>Build portfolio and apply for data internships</li>
+        {% elif career.title == "Civil Engineer" %}
+            <li>Study civil engineering fundamentals</li>
+            <li>Learn CAD and structural software</li>
+            <li>Work on practical site projects or internships</li>
+            <li>Prepare portfolio and apply for entry-level roles</li>
+        {% elif career.title == "Graphic Designer" %}
+            <li>Learn design tools (Photoshop, Illustrator, Figma)</li>
+            <li>Practice designing logos, posters, and websites</li>
+            <li>Take freelance projects or internships</li>
+            <li>Create a portfolio to showcase your work</li>
+        {% elif career.title == "Teacher" %}
+            <li>Complete a relevant degree in education or subject specialization</li>
+            <li>Learn teaching methodologies and classroom management</li>
+            <li>Do teaching internships or volunteer work</li>
+            <li>Prepare lesson plans and apply for teaching roles</li>
+        {% elif career.title == "Digital Marketer" %}
+            <li>Learn SEO, social media, and content marketing basics</li>
+            <li>Take online marketing courses (Google, HubSpot, etc.)</li>
+            <li>Run small campaigns or internships</li>
+            <li>Build portfolio and apply for marketing roles</li>
+        {% elif career.title == "Mechanical Engineer" %}
+            <li>Learn mechanical engineering concepts</li>
+            <li>Study CAD, manufacturing, and thermodynamics</li>
+            <li>Participate in projects or internships</li>
+            <li>Prepare portfolio and apply for mechanical roles</li>
+        {% elif career.title == "UX/UI Designer" %}
+            <li>Learn design principles and user experience fundamentals</li>
+            <li>Practice wireframing and prototyping</li>
+            <li>Work on app/web projects or internships</li>
+            <li>Create portfolio showcasing case studies</li>
+        {% elif career.title == "Content Writer" %}
+            <li>Learn writing styles, grammar, and SEO basics</li>
+            <li>Practice creating articles, blogs, and copywriting</li>
+            <li>Take internships or freelance projects</li>
+            <li>Build a portfolio to showcase your content</li>
+        {% else %}
+            <li>Step 1: Understand the basics of {{ career.title }}</li>
+            <li>Step 2: Take relevant courses</li>
+            <li>Step 3: Work on projects or internships</li>
+            <li>Step 4: Build portfolio and apply for jobs</li>
+        {% endif %}
     </ul>
 </div>
-<a href="{{ url_for('courses') }}" class="btn btn-success mt-3">Explore Courses</a>
-<a href="{{ url_for('internships') }}" class="btn btn-info mt-3">Find Internships</a>
+
+<div class="action-buttons">
+    <a href="{{ url_for('courses') }}" class="btn-custom">Explore Courses</a>
+    <a href="{{ url_for('internships') }}" class="btn-custom">Find Internships</a>
+</div>
 {% endblock %}

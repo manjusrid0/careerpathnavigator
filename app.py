@@ -27,6 +27,9 @@ class Career(db.Model):
 @app.route('/')
 def home():
     return render_template('index.html')
+@app.route("/guidance")
+def guidance():
+    return render_template("guidance.html")
 
 @app.route('/about')
 def about():
