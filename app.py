@@ -34,6 +34,68 @@ def guidance():
 @app.route('/about')
 def about():
     return render_template('about.html')
+@app.route("/quiz")
+def quiz():
+    return render_template("quiz.html")
+
+
+@app.route("/pathfinder", methods=["GET", "POST"])
+def pathfinder():
+    recommendation = None
+    resources = []
+
+    if request.method == "POST":
+        courses = int(request.form["courses"])
+        internships = int(request.form["internships"])
+        field = request.form["field"]
+        skills = request.form["skills"].lower()
+
+        # Basic logic for career recommendation
+        if field == "Software Development":
+            if "python" in skills or "java" in skills:
+                recommendation = "Software Engineer / Full Stack Developer"
+                resources = ["FreeCodeCamp - Web Dev", "Coursera - Java Programming", "Internshala - Software Internships"]
+            else:
+                recommendation = "Improve coding skills to aim for Software Development roles."
+                resources = ["W3Schools - Programming Basics", "HackerRank Practice"]
+
+        elif field == "Data Science":
+            if courses >= 3 and ("python" in skills or "sql" in skills):
+                recommendation = "Data Scientist / Data Analyst"
+                resources = ["Kaggle Datasets", "Google Data Analytics Certificate", "NPTEL - Data Science Course"]
+            else:
+                recommendation = "Start with foundational Data Science courses."
+                resources = ["Khan Academy - Statistics", "Coursera - Data Science Basics"]
+
+        elif field == "Healthcare":
+            recommendation = "Healthcare Professional (Nurse, Medical Assistant, Doctor)"
+            resources = ["WHO Free Courses", "NPTEL - Healthcare Management", "Internships at Local Hospitals"]
+
+        elif field == "Design":
+            if "photoshop" in skills or "figma" in skills:
+                recommendation = "UI/UX Designer or Graphic Designer"
+                resources = ["Canva Free Courses", "Coursera UI/UX Specialization", "Skillshare - Graphic Design"]
+            else:
+                recommendation = "Build creative software skills for design careers."
+                resources = ["YouTube - Photoshop Tutorials", "FreeCodeCamp UI/UX Guide"]
+
+        elif field == "Finance":
+            recommendation = "Accountant / Investment Banker / Financial Analyst"
+            resources = ["Coursera Finance Basics", "NSE India Free Courses", "Internships with Banks"]
+
+        elif field == "Marketing":
+            recommendation = "Digital Marketer / SEO Specialist / Social Media Manager"
+            resources = ["Google Digital Garage", "HubSpot Academy Free Marketing Courses", "Internshala - Marketing Internships"]
+
+        elif field == "Engineering":
+            recommendation = "Mechanical / Civil / Electrical Engineer"
+            resources = ["NPTEL Engineering Courses", "MIT OpenCourseWare", "Internships at Core Companies"]
+
+        # Extra encouragement
+        if internships == 0:
+            resources.append("Try doing internships on Internshala or LinkedIn to gain practical exposure.")
+
+    return render_template("pathfinder.html", recommendation=recommendation, resources=resources)
 
 @app.route('/careers')
 def careers():

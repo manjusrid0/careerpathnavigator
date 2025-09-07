@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+/* Background */
+body {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  font-family: "Poppins", sans-serif;
+  color: #222;
+  text-align: center;
+}
+
+/* Container */
+.quiz-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Headings */
+.quiz-container h2 {
+  margin-bottom: 20px;
+  color: #185a9d;
+}
+
+/* Question */
+.question {
+  font-size: 18px;
+  margin: 15px 0;
+  text-align: left;
+}
+
+/* Options */
+.options label {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  background: #f5f7fa;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.options label:hover {
+  background: #e3f2fd;
+}
+
+/* Button */
+button {
+  background: #43cea2;
+  color: #fff;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background: #2bb673;
+}
+
+/* Result */
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+
+<div class="quiz-container">
+  <h2>Career Path Quiz 🎯</h2>
+  <form id="quizForm">
+    <!-- Questions -->
+    <div id="questions"></div>
+    <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+  </form>
+  <div id="result"></div>
+</div>
+
+<script>
+// Quiz Data
+const quizData = [
+  {q: "Which job role is currently in very high demand?", 
+   options: ["Data Scientist", "Typist", "DVD Seller", "Coal Miner"], answer: "Data Scientist"},
+  {q: "What key skill is needed for a Software Developer?", 
+   options: ["Cooking", "Coding", "Driving", "Painting"], answer: "Coding"},
+  {q: "Which job has high demand in renewable energy?", 
+   options: ["Solar Engineer", "Horse Cart Driver", "Coal Worker", "Gold Miner"], answer: "Solar Engineer"},
+  {q: "Digital Marketing mainly requires knowledge of?", 
+   options: ["SEO & Analytics", "Chemistry", "Carpentry", "Farming"], answer: "SEO & Analytics"},
+  {q: "Which skill is most needed for a Graphic Designer?", 
+   options: ["Photoshop", "Accounting", "Medical Surgery", "Driving"], answer: "Photoshop"},
+  {q: "Which job is growing due to Artificial Intelligence?", 
+   options: ["AI Engineer", "Blacksmith", "DVD Rental Clerk", "Telegraph Operator"], answer: "AI Engineer"},
+  {q: "Cybersecurity experts protect against?", 
+   options: ["Hacking", "Floods", "Earthquakes", "Cooking"], answer: "Hacking"},
+  {q: "Nurses and doctors mainly need skills in?", 
+   options: ["Medical Knowledge", "Dancing", "Car Racing", "Carpentry"], answer: "Medical Knowledge"},
+  {q: "A teacher must have strong?", 
+   options: ["Communication Skills", "Driving Skills", "Coding Skills", "Jumping Skills"], answer: "Communication Skills"},
+  {q: "Which field is booming due to e-commerce?", 
+   options: ["Logistics & Supply Chain", "Coal Mining", "DVD Selling", "Fax Machine Repair"], answer: "Logistics & Supply Chain"},
+  {q: "What skill is critical for an Accountant?", 
+   options: ["Mathematics", "Painting", "Swimming", "Singing"], answer: "Mathematics"},
+  {q: "Which profession needs creativity the most?", 
+   options: ["Animator", "Lawyer", "Bus Driver", "Pilot"], answer: "Animator"},
+  {q: "Doctors must complete which degree?", 
+   options: ["MBBS", "B.Com", "BA History", "BBA"], answer: "MBBS"},
+  {q: "Which is a top job in the finance sector?", 
+   options: ["Investment Banker", "Typist", "Coal Loader", "Tailor"], answer: "Investment Banker"},
+  {q: "Web Developers should know?", 
+   options: ["HTML, CSS, JS", "Carpentry", "Nursing", "Biology"], answer: "HTML, CSS, JS"},
+  {q: "Which is the most important soft skill for leaders?", 
+   options: ["Decision Making", "Painting", "Cooking", "Sprinting"], answer: "Decision Making"},
+  {q: "Which field has high demand after COVID?", 
+   options: ["Healthcare", "Coal Mining", "Fax Services", "DVD Stores"], answer: "Healthcare"},
+  {q: "A Data Analyst must know?", 
+   options: ["Excel & SQL", "Driving", "Carpentry", "Acting"], answer: "Excel & SQL"},
+  {q: "Civil Engineers mainly work in?", 
+   options: ["Construction", "Music", "Baking", "Theatre"], answer: "Construction"},
+  {q: "Which career is important for climate change solutions?", 
+   options: ["Environmental Scientist", "Coal Miner", "DVD Seller", "Fax Operator"], answer: "Environmental Scientist"},
+];
+
+// Load questions
+let questionsDiv = document.getElementById("questions");
+quizData.forEach((item, index) => {
+  let qHtml = `
+    <div class="question">${index+1}. ${item.q}</div>
+    <div class="options">
+      ${item.options.map(opt => 
+        `<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>`
+      ).join('')}
+    </div>
+  `;
+  questionsDiv.innerHTML += qHtml;
+});
+
+// Submit Quiz
+function submitQuiz() {
+  let score = 0;
+  quizData.forEach((item, index) => {
+    let selected = document.querySelector(`input[name="q${index}"]:checked`);
+    if (selected && selected.value === item.answer) {
+      score++;
+    }
+  });
+
+  let resultText = `You scored ${score} out of ${quizData.length}.`;
+  if(score === quizData.length){
+    resultText += " 🌟 Perfect! You're a career genius!";
+  } else if(score > 10){
+    resultText += " 👍 Great job! You know a lot about careers!";
+  } else {
+    resultText += " 💡 Keep learning! Explore more job paths!";
+  }
+  document.getElementById("result").innerText = resultText;
+}
+</script>
+{% endblock %}
