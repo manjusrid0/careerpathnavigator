@@ -22,10 +22,11 @@
               <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('quiz') }}">Quiz</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('pathfinder') }}">Path Finder</a></li>
-
+              <li class="nav-item"><a class="nav-link" href="{{ url_for('resume_builder') }}">Resume</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('careers') }}">Careers</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('courses') }}">Courses</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('internships') }}">Internships</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ url_for('guidance') }}">Guidance</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
 
                     {% if session.get('user_id') %}

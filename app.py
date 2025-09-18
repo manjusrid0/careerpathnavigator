@@ -27,6 +27,7 @@ class Career(db.Model):
 @app.route('/')
 def home():
     return render_template('index.html')
+
 @app.route("/guidance")
 def guidance():
     return render_template("guidance.html")
@@ -37,6 +38,9 @@ def about():
 @app.route("/quiz")
 def quiz():
     return render_template("quiz.html")
+@app.route('/resume-builder')
+def resume_builder():
+    return render_template('resume_builder.html')
 
 
 @app.route("/pathfinder", methods=["GET", "POST"])

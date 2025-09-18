@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Builder{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resume.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<div class="container resume-container">
+  <h1>Resume Builder</h1>
+
+  <div class="builder-layout">
+    <!-- Form Column -->
+    <div class="form-column">
+      <form id="resume-form" onsubmit="return false;">
+        <!-- Personal Info -->
+        <section class="form-section">
+          <h3>Personal Info</h3>
+          <input type="text" id="fullName" placeholder="Full Name" />
+          <input type="text" id="title" placeholder="Job Title" />
+          <input type="email" id="email" placeholder="Email" />
+          <input type="text" id="phone" placeholder="Phone" />
+          <input type="text" id="location" placeholder="Location" />
+          <textarea id="summary" placeholder="Professional Summary"></textarea>
+        </section>
+
+        <!-- Education -->
+        <section class="form-section">
+          <h3>Education</h3>
+          <div id="education-list"></div>
+          <button type="button" id="add-edu-btn">+ Add Education</button>
+        </section>
+
+        <!-- Experience -->
+        <section class="form-section">
+          <h3>Experience</h3>
+          <div id="experience-list"></div>
+          <button type="button" id="add-exp-btn">+ Add Experience</button>
+        </section>
+
+        <!-- Skills -->
+        <section class="form-section">
+          <h3>Skills</h3>
+          <input type="text" id="skills-input" placeholder="Comma-separated skills" />
+          <button type="button" id="update-preview-btn">Update Preview</button>
+        </section>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button type="button" id="download-json-btn">Download JSON</button>
+          <button type="button" id="export-pdf-btn">Export PDF</button>
+          <button type="button" id="clear-btn">Clear All</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Preview Column -->
+    <div class="preview-column">
+      <h3>Live Preview</h3>
+      <div id="resume-preview" class="resume-card">
+        <div id="r-name">Your Name</div>
+        <div id="r-title">Job Title</div>
+        <div id="r-contact"></div>
+        <div id="r-summary"></div>
+        <div id="r-education"><h4>Education</h4></div>
+        <div id="r-experience"><h4>Experience</h4></div>
+        <div id="r-skills"><h4>Skills</h4><div class="skills-list"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/resume.js') }}"></script>
+{% endblock %}
