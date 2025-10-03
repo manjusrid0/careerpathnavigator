@@ -1,79 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>AI Career Guidance</title>
   <style>
+    :root {
+      --primary: #004080;
+      --secondary: #0073e6;
+      --bg: #f4f8ff;
+      --muted: #6b7280;
+    }
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: #222;
     }
-    #recommendations {
-      margin-top: 20px;
+    header {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 0 0 20px 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .input-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    input, textarea {
+      width: 100%;
       padding: 10px;
-      border: 1px solid #ddd;
+      margin-bottom: 12px;
       border-radius: 8px;
-      background: #f9f9f9;
+      border: 1px solid #ccc;
+      font-size: 1rem;
     }
-    .job {
-      margin-bottom: 15px;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
+    button {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
     }
-    .job:last-child {
-      border-bottom: none;
+    button:hover {
+      opacity: 0.9;
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .job-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    }
+    .job-card h3 {
+      margin: 0 0 8px;
+      color: var(--secondary);
+    }
+    .score {
+      font-weight: bold;
+      color: var(--primary);
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Career Guidance Page</h1>
-  <p>Click below to get AI-powered career recommendations:</p>
-  <button onclick="getRecommendations()">Get Recommendations</button>
+  <header>
+    <h1>AI Career Guidance</h1>
+    <p>Discover the best careers based on your profile</p>
+  </header>
 
-  <div id="recommendations">
-    <h2>Recommended Careers:</h2>
-    <div id="results"></div>
+  <div class="container">
+    <div class="input-card">
+      <h2>Tell us about yourself</h2>
+      <label>Education</label>
+      <input type="text" id="education" placeholder="e.g., B.Sc Computer Science">
+      
+      <label>Experience (years)</label>
+      <input type="number" id="experience" placeholder="e.g., 2">
+      
+      <label>Skills (comma separated)</label>
+      <input type="text" id="skills" placeholder="e.g., Python, SQL, Machine Learning">
+      
+      <label>Interests (comma separated)</label>
+      <input type="text" id="interests" placeholder="e.g., Data Science, Web Development">
+      
+      <button onclick="getRecommendations()">Get Recommendations</button>
+    </div>
+
+    <div id="recommendations" class="results"></div>
   </div>
 
   <script>
-    async function getRecommendations() {
-      const profile = {
-        education: "B.Sc Computer Science",
-        experience_years: 1,
-        skills: ["python", "sql"],
-        interests: ["data science", "web dev"],
-        preferred_industries: ["software", "analytics"]
-      };
-
-      try {
-        const response = await fetch("http://127.0.0.1:5000/recommend", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ profile: profile, top_k: 3 })
-        });
-
-        const data = await response.json();
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = "";
-
-        if (data.status === "success") {
-          data.recommendations.forEach(job => {
-            resultsDiv.innerHTML += `
-              <div class="job">
-                <h3>${job.title}</h3>
-                <p><b>Industry:</b> ${job.industry}</p>
-                <p><b>Level:</b> ${job.level}</p>
-                <p><b>Description:</b> ${job.description}</p>
-                <p><b>Skills:</b> ${job.skills.join(", ")}</p>
-                <p><b>Match Score:</b> ${(job.score * 100).toFixed(2)}%</p>
-              </div>
-            `;
-          });
-        } else {
-          resultsDiv.innerHTML = `<p style="color:red;">Error: ${data.message}</p>`;
-        }
-      } catch (error) {
-        document.getElementById("results").innerHTML = `<p style="color:red;">Server not reachable. Start Flask backend!</p>`;
+    const careersDB = [
+      {
+        title: "Software Engineer",
+        industry: "Software",
+        level: "Entry to Mid",
+        description: "Build and maintain software systems and applications.",
+        skills: ["python","java","c++","sql","git","web dev"]
+      },
+      {
+        title: "Data Scientist",
+        industry: "Analytics",
+        level: "Entry to Senior",
+        description: "Analyze data, build predictive models, and derive insights.",
+        skills: ["python","sql","machine learning","statistics","data visualization"]
+      },
+      {
+        title: "Digital Marketer",
+        industry: "Marketing",
+        level: "Entry to Mid",
+        description: "Plan and execute digital marketing campaigns.",
+        skills: ["seo","content writing","social media","analytics"]
+      },
+      {
+        title: "Cybersecurity Specialist",
+        industry: "Security",
+        level: "Mid to Senior",
+        description: "Protect systems and networks from cyber threats.",
+        skills: ["networking","linux","firewalls","security","ethical hacking"]
+      },
+      {
+        title: "Teacher",
+        industry: "Education",
+        level: "Entry to Senior",
+        description: "Educate and inspire students in various subjects.",
+        skills: ["communication","teaching","presentation","subject knowledge"]
       }
+    ];
+
+    function getRecommendations() {
+      const education = document.getElementById("education").value.toLowerCase();
+      const exp = parseInt(document.getElementById("experience").value || "0");
+      const skills = document.getElementById("skills").value.toLowerCase().split(",");
+      const interests = document.getElementById("interests").value.toLowerCase().split(",");
+
+      let resultsHTML = "<h2>Recommended Careers:</h2>";
+
+      careersDB.forEach(job => {
+        // Match score calculation
+        let score = 0;
+        skills.forEach(skill => {
+          if (job.skills.includes(skill.trim())) score += 0.15;
+        });
+        interests.forEach(int => {
+          if (job.title.toLowerCase().includes(int.trim())) score += 0.25;
+        });
+        if (education.includes("computer") && job.industry === "Software") score += 0.2;
+        if (education.includes("data") && job.industry === "Analytics") score += 0.2;
+        if (exp >= 2) score += 0.1;
+
+        score = Math.min(score, 1); // cap at 1
+
+        if (score > 0.2) {
+          resultsHTML += `
+            <div class="job-card">
+              <h3>${job.title}</h3>
+              <p><b>Industry:</b> ${job.industry}</p>
+              <p><b>Level:</b> ${job.level}</p>
+              <p><b>Description:</b> ${job.description}</p>
+              <p><b>Required Skills:</b> ${job.skills.join(", ")}</p>
+              <p class="score">Match Score: ${(score * 100).toFixed(0)}%</p>
+            </div>
+          `;
+        }
+      });
+
+      if (resultsHTML === "<h2>Recommended Careers:</h2>") {
+        resultsHTML += "<p style='color:red;'>No strong matches found. Try adding more skills or interests.</p>";
+      }
+
+      document.getElementById("recommendations").innerHTML = resultsHTML;
     }
   </script>
 </body>

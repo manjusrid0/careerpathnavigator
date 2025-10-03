@@ -1,158 +1,382 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career Roadmaps</title>
+  <style>
+    :root {
+      --accent1: #004080;
+      --accent2: #0073e6;
+      --muted: #6b7280;
+      --bg: #f7fbff;
+    }
     body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #cce0ff, #ffffff);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, var(--bg), #fff);
     }
-
-    .career-header {
-        text-align: center;
-        margin: 40px 0 30px 0;
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
     }
-
-    .career-header h2 {
-        color: #004080;
-        font-weight: 700;
-        font-size: 2rem;
+    header {
+      text-align: center;
+      margin-bottom: 20px;
     }
-
-    .career-header p {
-        font-size: 1rem;
-        color: #333;
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--accent1);
     }
-
-    .roadmap-card {
-        background: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        padding: 25px;
-        margin-bottom: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    header p {
+      margin: 6px 0;
+      color: var(--muted);
     }
-
-    .roadmap-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin: 12px 0;
     }
-
-    .roadmap-card h4 {
-        color: #0073e6;
-        margin-bottom: 15px;
+    .card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
     }
-
-    .roadmap-card ul {
-        list-style: none;
-        padding-left: 0;
+    .quote {
+      font-style: italic;
+      color: var(--accent2);
+      margin: 12px 0;
     }
-
-    .roadmap-card ul li {
-        position: relative;
-        padding-left: 25px;
-        margin-bottom: 10px;
-        font-size: 0.95rem;
-        color: #555;
+    .roadmap-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 20px;
     }
-
-    .roadmap-card ul li::before {
-        content: "✔";
-        position: absolute;
-        left: 0;
-        color: #0073e6;
-        font-weight: bold;
+    @media (min-width: 800px) {
+      .roadmap-section {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-
-    .btn-custom {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 10px 20px;
-        border-radius: 30px;
-        background: linear-gradient(45deg, #004080, #0073e6);
-        color: #fff;
-        font-weight: 600;
-        text-decoration: none;
-        transition: background 0.3s ease;
+    .step {
+      border-left: 4px solid var(--accent2);
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffffff,#fbfdff);
     }
-
-    .btn-custom:hover {
-        background: linear-gradient(45deg, #00264d, #004080);
-        color: #fff;
+    .step h3 {
+      margin: 0 0 6px 0;
+      color: var(--accent1);
     }
-
-    .action-buttons {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
+    .step p {
+      margin: 0;
+      color: #374151;
+      font-size: 0.95rem;
     }
-</style>
+    .resources ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin: 10px 5px 0 0;
+      cursor: pointer;
+    }
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="career-title">Career Roadmap</h1>
+      <p id="career-desc">Choose your career to see a detailed roadmap</p>
+      <select id="career-select">
+        <option value="">-- Select a Career --</option>
+        <option value="software">Software Engineer</option>
+        <option value="data">Data Scientist</option>
+        <option value="marketing">Digital Marketer</option>
+        <option value="civil">Civil Engineer</option>
+        <option value="mechanical">Mechanical Engineer</option>
+        <option value="electrical">Electrical Engineer</option>
+        <option value="graphic">Graphic Designer</option>
+        <option value="ux">UX/UI Designer</option>
+        <option value="teacher">Teacher</option>
+        <option value="writer">Content Writer</option>
+        <option value="doctor">Doctor (General Practitioner)</option>
+        <option value="lawyer">Lawyer</option>
+        <option value="accountant">Chartered Accountant</option>
+        <option value="entrepreneur">Entrepreneur / Startup Founder</option>
+        <option value="cyber">Cybersecurity Specialist</option>
+      </select>
+    </header>
 
-<div class="career-header">
-    <h2>{{ career.title }}</h2>
-    <p>{{ career.description }}</p>
-</div>
+    <div id="roadmap" class="card" style="display:none;">
+      <h2 style="margin-top:0;color:var(--accent1)">Roadmap — Detailed Plan</h2>
+      <p class="quote" id="career-quote"></p>
+      <p class="small" id="career-overview"></p>
 
-<div class="roadmap-card">
-    <h4>Suggested Roadmap</h4>
-    <ul>
-        {% if career.title == "Software Engineer" %}
-            <li>Learn programming fundamentals (Python, Java, C++)</li>
-            <li>Study data structures and algorithms</li>
-            <li>Work on small software projects or open-source contributions</li>
-            <li>Build a GitHub portfolio and apply for internships</li>
-        {% elif career.title == "Data Scientist" %}
-            <li>Learn Python/R and statistics basics</li>
-            <li>Study machine learning and data analysis</li>
-            <li>Work on datasets and Kaggle projects</li>
-            <li>Build portfolio and apply for data internships</li>
-        {% elif career.title == "Civil Engineer" %}
-            <li>Study civil engineering fundamentals</li>
-            <li>Learn CAD and structural software</li>
-            <li>Work on practical site projects or internships</li>
-            <li>Prepare portfolio and apply for entry-level roles</li>
-        {% elif career.title == "Graphic Designer" %}
-            <li>Learn design tools (Photoshop, Illustrator, Figma)</li>
-            <li>Practice designing logos, posters, and websites</li>
-            <li>Take freelance projects or internships</li>
-            <li>Create a portfolio to showcase your work</li>
-        {% elif career.title == "Teacher" %}
-            <li>Complete a relevant degree in education or subject specialization</li>
-            <li>Learn teaching methodologies and classroom management</li>
-            <li>Do teaching internships or volunteer work</li>
-            <li>Prepare lesson plans and apply for teaching roles</li>
-        {% elif career.title == "Digital Marketer" %}
-            <li>Learn SEO, social media, and content marketing basics</li>
-            <li>Take online marketing courses (Google, HubSpot, etc.)</li>
-            <li>Run small campaigns or internships</li>
-            <li>Build portfolio and apply for marketing roles</li>
-        {% elif career.title == "Mechanical Engineer" %}
-            <li>Learn mechanical engineering concepts</li>
-            <li>Study CAD, manufacturing, and thermodynamics</li>
-            <li>Participate in projects or internships</li>
-            <li>Prepare portfolio and apply for mechanical roles</li>
-        {% elif career.title == "UX/UI Designer" %}
-            <li>Learn design principles and user experience fundamentals</li>
-            <li>Practice wireframing and prototyping</li>
-            <li>Work on app/web projects or internships</li>
-            <li>Create portfolio showcasing case studies</li>
-        {% elif career.title == "Content Writer" %}
-            <li>Learn writing styles, grammar, and SEO basics</li>
-            <li>Practice creating articles, blogs, and copywriting</li>
-            <li>Take internships or freelance projects</li>
-            <li>Build a portfolio to showcase your content</li>
-        {% else %}
-            <li>Step 1: Understand the basics of {{ career.title }}</li>
-            <li>Step 2: Take relevant courses</li>
-            <li>Step 3: Work on projects or internships</li>
-            <li>Step 4: Build portfolio and apply for jobs</li>
-        {% endif %}
-    </ul>
-</div>
+      <div class="roadmap-section" id="steps"></div>
 
-<div class="action-buttons">
-    <a href="{{ url_for('courses') }}" class="btn-custom">Explore Courses</a>
-    <a href="{{ url_for('internships') }}" class="btn-custom">Find Internships</a>
-</div>
-{% endblock %}
+      <div class="resources">
+        <h4 style="color:var(--accent1)">Recommended Resources</h4>
+        <ul id="resources-list"></ul>
+      </div>
+
+      <div style="margin-top:16px;">
+        <strong>Motivational prompt:</strong>
+        <div class="small">Write down one small goal for today related to your path. Consistency wins!</div>
+      </div>
+
+      <button class="btn" onclick="downloadPDF()">Download PDF</button>
+    </div>
+  </div>
+
+  <script>
+    const careers = {
+      software: {
+        title: "Software Engineer",
+        desc: "Design, build, test and maintain software systems.",
+        quote: "Ship often. Learn faster. Build useful things.",
+        overview: "From fundamentals to industry-ready engineer in about 12+ months.",
+        steps: [
+          {heading: "Months 0–3 — Foundations", content: "Learn Python/JavaScript, Git, small projects."},
+          {heading: "Months 3–6 — Data Structures", content: "Master arrays, trees, graphs, sorting."},
+          {heading: "Months 6–9 — Web & DB", content: "HTTP, REST, Flask/Express, SQL/NoSQL."},
+          {heading: "Months 9–12 — System Design", content: "Scalable systems, caching, load balancing."},
+          {heading: "Months 12+ — Specialization", content: "Backend/frontend/mobile; build portfolio."}
+        ],
+        resources: ["CS fundamentals", "GitHub guides", "System design primers"]
+      },
+      data: {
+        title: "Data Scientist",
+        desc: "Extract insights, build models from data.",
+        quote: "Let the data speak — but tell a story they understand.",
+        overview: "Math, stats, ML, visualization to production ML.",
+        steps: [
+          {heading: "Months 0–3 — Math & Python", content: "Linear algebra, probability, pandas, numpy."},
+          {heading: "Months 3–6 — Visualization", content: "EDA, cleaning, feature engineering."},
+          {heading: "Months 6–9 — ML Models", content: "Regression, trees, clustering, basics of NN."},
+          {heading: "Months 9–12 — MLOps", content: "Deploy models, CI/CD, monitoring."},
+          {heading: "Months 12+ — Advanced Topics", content: "Deep learning, NLP, time series."}
+        ],
+        resources: ["Hands-on ML", "Kaggle", "MLOps tutorials"]
+      },
+      marketing: {
+        title: "Digital Marketer",
+        desc: "Plan campaigns using SEO, content, social, paid media.",
+        quote: "Test, measure, iterate — marketing is an experiment.",
+        overview: "Creative + analytical skills for growth.",
+        steps: [
+          {heading: "Months 0–2 — Basics", content: "Buyer personas, funnels, Google Analytics."},
+          {heading: "Months 2–5 — SEO & Content", content: "Keywords, on-page SEO, blogs."},
+          {heading: "Months 5–9 — Paid Ads", content: "Run campaigns, A/B testing, ROAS."},
+          {heading: "Months 9+ — Growth Strategy", content: "Retention, personalization, scaling."}
+        ],
+        resources: ["Google Skillshop", "HubSpot", "Case studies"]
+      },
+      civil: {
+        title: "Civil Engineer",
+        desc: "Design and supervise infrastructure projects.",
+        quote: "Strong foundations build lasting futures.",
+        overview: "From fundamentals to professional engineering practice.",
+        steps: [
+          {heading: "Year 1–2 — Basics", content: "Mechanics, structures, surveying."},
+          {heading: "Year 2–3 — Software", content: "AutoCAD, STAAD Pro, Revit."},
+          {heading: "Year 3–4 — Projects", content: "Internships, site visits, small designs."},
+          {heading: "Year 4+ — Professional", content: "Portfolio, certifications, PE exam."}
+        ],
+        resources: ["NPTEL Civil courses", "AutoCAD tutorials"]
+      },
+      mechanical: {
+        title: "Mechanical Engineer",
+        desc: "Design machines, engines, and manufacturing systems.",
+        quote: "Motion and innovation drive the world.",
+        overview: "From thermodynamics to robotics.",
+        steps: [
+          {heading: "Year 1–2 — Basics", content: "Mechanics, thermodynamics, CAD."},
+          {heading: "Year 2–3 — Applications", content: "Manufacturing, materials science."},
+          {heading: "Year 3–4 — Projects", content: "Robotics, automotive, internships."},
+          {heading: "Year 4+ — Careers", content: "Prepare GATE/FE exams, certifications."}
+        ],
+        resources: ["MIT OCW", "SolidWorks tutorials"]
+      },
+      electrical: {
+        title: "Electrical Engineer",
+        desc: "Work on circuits, power, electronics, control systems.",
+        quote: "Powering the future one circuit at a time.",
+        overview: "Electronics to large-scale power systems.",
+        steps: [
+          {heading: "Year 1–2 — Fundamentals", content: "Circuits, electromagnetism, math."},
+          {heading: "Year 2–3 — Applied", content: "Electronics, signals, microcontrollers."},
+          {heading: "Year 3–4 — Power", content: "Power systems, machines, internships."},
+          {heading: "Year 4+ — Careers", content: "Grid, renewable energy, embedded systems."}
+        ],
+        resources: ["All About Circuits", "Arduino, Raspberry Pi projects"]
+      },
+      graphic: {
+        title: "Graphic Designer",
+        desc: "Create visuals using Photoshop, Illustrator, Figma.",
+        quote: "Design is intelligence made visible.",
+        overview: "From basics to portfolio.",
+        steps: [
+          {heading: "Months 0–2 — Basics", content: "Photoshop, Illustrator, Figma basics."},
+          {heading: "Months 2–4 — Practice", content: "Logos, posters, digital art."},
+          {heading: "Months 4–6 — Freelance", content: "Work on real-world projects."},
+          {heading: "Months 6+ — Portfolio", content: "Create professional showcase."}
+        ],
+        resources: ["Canva tutorials", "Adobe Creative Cloud courses"]
+      },
+      ux: {
+        title: "UX/UI Designer",
+        desc: "Design user-friendly interfaces for apps/websites.",
+        quote: "Good design is invisible — users just feel it.",
+        overview: "Principles to advanced prototyping.",
+        steps: [
+          {heading: "Months 0–3 — Principles", content: "UX laws, color, typography."},
+          {heading: "Months 3–6 — Tools", content: "Wireframing, prototyping in Figma/Sketch."},
+          {heading: "Months 6–9 — Projects", content: "App/web projects, case studies."},
+          {heading: "Months 9+ — Portfolio", content: "Show full design process."}
+        ],
+        resources: ["Interaction Design Foundation", "Figma community"]
+      },
+      teacher: {
+        title: "Teacher",
+        desc: "Educate and inspire students.",
+        quote: "Teaching is the profession that teaches all professions.",
+        overview: "From degree to classroom expertise.",
+        steps: [
+          {heading: "Step 1", content: "Complete degree in subject/education."},
+          {heading: "Step 2", content: "Learn pedagogy and classroom management."},
+          {heading: "Step 3", content: "Internships, volunteering, lesson planning."},
+          {heading: "Step 4", content: "Apply for teaching positions."}
+        ],
+        resources: ["Khan Academy", "Coursera pedagogy courses"]
+      },
+      writer: {
+        title: "Content Writer",
+        desc: "Create articles, blogs, copy for media.",
+        quote: "Words can change minds — choose them wisely.",
+        overview: "Practice, SEO, portfolio.",
+        steps: [
+          {heading: "Step 1", content: "Learn grammar, SEO basics."},
+          {heading: "Step 2", content: "Write blogs, articles daily."},
+          {heading: "Step 3", content: "Freelance, internships."},
+          {heading: "Step 4", content: "Build a portfolio, apply for jobs."}
+        ],
+        resources: ["Grammarly blog", "Copywriting guides"]
+      },
+      doctor: {
+        title: "Doctor (General Practitioner)",
+        desc: "Provide medical diagnosis and treatment.",
+        quote: "To cure sometimes, to relieve often, to comfort always.",
+        overview: "Medical education to patient care.",
+        steps: [
+          {heading: "Step 1", content: "Complete MBBS degree."},
+          {heading: "Step 2", content: "Internship, patient exposure."},
+          {heading: "Step 3", content: "Residency or specialization."},
+          {heading: "Step 4", content: "Practice in hospitals/clinics."}
+        ],
+        resources: ["MedlinePlus", "BMJ Best Practice"]
+      },
+      lawyer: {
+        title: "Lawyer",
+        desc: "Represent clients in legal matters.",
+        quote: "Justice delayed is justice denied.",
+        overview: "From law degree to courtroom practice.",
+        steps: [
+          {heading: "Step 1", content: "Law degree (LLB/JD)."},
+          {heading: "Step 2", content: "Bar exam, licensing."},
+          {heading: "Step 3", content: "Internship/associate in law firm."},
+          {heading: "Step 4", content: "Specialize in criminal/civil/corporate."}
+        ],
+        resources: ["Legal casebooks", "Bar prep courses"]
+      },
+      accountant: {
+        title: "Chartered Accountant",
+        desc: "Handle auditing, taxation, finance for businesses.",
+        quote: "Numbers tell the story of business.",
+        overview: "From accounting basics to global certification.",
+        steps: [
+          {heading: "Step 1", content: "Commerce degree, basics of accounts."},
+          {heading: "Step 2", content: "Enroll in CA program."},
+          {heading: "Step 3", content: "Articleship, practical training."},
+          {heading: "Step 4", content: "Final exams, certification."}
+        ],
+        resources: ["ICAI modules", "Accounting tutorials"]
+      },
+      entrepreneur: {
+        title: "Entrepreneur",
+        desc: "Start and scale a business.",
+        quote: "Fail fast, learn faster, grow strongest.",
+        overview: "Idea → MVP → Scale.",
+        steps: [
+          {heading: "Step 1", content: "Identify problem/idea."},
+          {heading: "Step 2", content: "Build MVP, validate with users."},
+          {heading: "Step 3", content: "Raise funds, grow team."},
+          {heading: "Step 4", content: "Scale business globally."}
+        ],
+        resources: ["Y Combinator startup school", "Lean Startup book"]
+      },
+      cyber: {
+        title: "Cybersecurity Specialist",
+        desc: "Protect systems from hackers, threats.",
+        quote: "The best defense is layered security.",
+        overview: "Networking + security certifications.",
+        steps: [
+          {heading: "Step 1", content: "Learn networking basics (CCNA-level)."},
+          {heading: "Step 2", content: "Security fundamentals, OS hardening."},
+          {heading: "Step 3", content: "Ethical hacking, penetration testing."},
+          {heading: "Step 4", content: "Certifications: CEH, CISSP, Security+."}
+        ],
+        resources: ["OWASP Top 10", "Cybrary security courses"]
+      }
+    };
+
+    document.getElementById('career-select').addEventListener('change', function() {
+      const val = this.value;
+      const roadmapDiv = document.getElementById('roadmap');
+      if (!val) { roadmapDiv.style.display = "none"; return; }
+      const career = careers[val];
+      document.getElementById('career-title').innerText = career.title;
+      document.getElementById('career-desc').innerText = career.desc;
+      document.getElementById('career-quote').innerText = `"${career.quote}"`;
+      document.getElementById('career-overview').innerText = career.overview;
+      const stepsDiv = document.getElementById('steps');
+      stepsDiv.innerHTML = "";
+      career.steps.forEach(step => {
+        const div = document.createElement('div');
+        div.className = "step";
+        div.innerHTML = `<h3>${step.heading}</h3><p>${step.content}</p>`;
+        stepsDiv.appendChild(div);
+      });
+      const resUl = document.getElementById('resources-list');
+      resUl.innerHTML = "";
+      career.resources.forEach(r => {
+        const li = document.createElement('li');
+        li.innerText = r;
+        resUl.appendChild(li);
+      });
+      roadmapDiv.style.display = "block";
+    });
+
+    function downloadPDF() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
